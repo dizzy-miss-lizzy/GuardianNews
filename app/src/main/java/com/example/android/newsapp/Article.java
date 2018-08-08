@@ -1,5 +1,7 @@
 package com.example.android.newsapp;
 
+import android.graphics.Bitmap;
+
 /**
  * {@link Article} represents the information about an article, such as title, contributor,
  * section, date, and url, and provides the get() methods for the data.
@@ -21,6 +23,9 @@ public class Article {
     /** URL of article **/
     private String mUrl;
 
+    /** Thumbnail image of article **/
+    private Bitmap mThumbnail;
+
     /**
      * Create an Article object
      *
@@ -29,13 +34,15 @@ public class Article {
      * @param section of the article, i.e. Technology
      * @param date of article, displayed as mm-dd-yyyy
      * @param url of article used in an implicit intent
+     * @param thumbnail of article that displays image
      */
-    public Article(String title, String contributor, String section, String date, String url) {
+    public Article(String title, String contributor, String section, String date, String url, Bitmap thumbnail) {
         mTitle = title;
         mContributor = contributor;
         mSection = section;
         mDate = date;
         mUrl = url;
+        mThumbnail = thumbnail;
     }
 
     /** Get the Title of the object **/
@@ -61,5 +68,10 @@ public class Article {
     /** Get the URL of the object **/
     public String getUrl() {
         return mUrl;
+    }
+
+    /** Get the Thumbnail of the object **/
+    public Bitmap getThumbnail() {
+        return mThumbnail;
     }
 }

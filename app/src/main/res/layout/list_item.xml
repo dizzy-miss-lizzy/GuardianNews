@@ -18,6 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/thumbnail_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true" />
+
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -25,6 +31,7 @@
                 android:layout_marginLeft="@dimen/margin_left_right"
                 android:layout_marginRight="@dimen/margin_left_right"
                 android:layout_marginTop="@dimen/margin_top_bottom"
+                android:layout_toRightOf="@id/thumbnail_image"
                 android:textSize="@dimen/title_text_size"
                 android:textColor="@android:color/black"
                 tools:text="Title" />
@@ -34,6 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title"
+                android:layout_toRightOf="@id/thumbnail_image"
                 android:layout_marginLeft="@dimen/margin_left_right"
                 android:layout_marginRight="@dimen/margin_left_right"
                 tools:text="Contributor" />
@@ -43,6 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/contributor"
+                android:layout_toRightOf="@id/thumbnail_image"
                 android:layout_marginLeft="@dimen/margin_left_right"
                 android:layout_marginRight="@dimen/margin_left_right"
                 tools:text="Section" />
@@ -55,6 +64,7 @@
                 android:layout_marginLeft="@dimen/margin_left_right"
                 android:layout_marginRight="@dimen/margin_left_right"
                 android:layout_marginBottom="@dimen/margin_top_bottom"
+                android:layout_toRightOf="@id/thumbnail_image"
                 tools:text="Date" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>

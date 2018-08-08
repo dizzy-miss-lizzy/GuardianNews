@@ -1,5 +1,47 @@
 <resources>
     <string name="app_name">Tech News</string>
-    <string name="no_articles_found">No articles found.</string>
-    <string name="no_internet">No internet connection.</string>
+    <string name="no_articles_found">Currently, there is nothing to display.\nCheck again later for new stories.</string>
+    <string name="no_internet">Oops!\nYou are not connected to the Internet.</string>
+    <string name="empty_view_image_description">No Internet or Error icon</string>
+
+    <!-- Settings Activity ActionBar title -->
+    <string name="settings_title">Article Settings</string>
+
+    <!-- Order By preference: contains Newest, Oldest, and Relevance -->
+    <string name="order_by_title">Order By</string>
+    <string name="order_by_key" translatable="false">order_by</string>
+    <string name="order_by_default" translatable="false">@string/order_by_newest_value</string>
+
+    <string name="order_by_newest_title">Newest</string>
+    <string name="order_by_newest_value" translatable="false">newest</string>
+
+    <string name="order_by_oldest_title">Oldest</string>
+    <string name="order_by_oldest_value" translatable="false">oldest</string>
+
+    <string name="order_by_relevance_title">Relevance</string>
+    <string name="order_by_relevance_value" translatable="false">relevance</string>
+
+    <!-- Page Size preference: 10 articles displayed by default -->
+    <string name="page_size_title">Articles Displayed</string>
+    <string name="page_size_key" translatable="false">page_size</string>
+    <string name="page_size_default" translatable="false">10</string>
+
+    <!-- Keyword preference: -->
+    <string name="keyword_title">Keyword</string>
+    <string name="keyword_key" translatable="false">keyword</string>
+    <string name="keyword_default" translatable="false"></string>
+
+    <!-- Section preference: -->
+    <string name="section_title">Section</string>
+    <string name="section_key" translatable="false">section</string>
+    <string name="section_default" translatable="false">@string/section_tech_value</string>
+
+    <string name="section_tech_title">Technology</string>
+    <string name="section_tech_value" translatable="false">technology</string>
+
+    <string name="section_science_title">Science</string>
+    <string name="section_science_value" translatable="false">science</string>
+
+    <string name="section_us_news_title">US News</string>
+    <string name="section_us_news_value" translatable="false">us-news</string>
 </resources>

@@ -1,60 +1,82 @@
 package com.example.android.newsapp;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * {@link ArticleAdapter} is an {@link ArrayAdapter} that provides the layout for the
  * list of articles based on the data source taken from the {@link Article} objects and
  * parsed in {@link QueryUtils}.
+ * <p/>
+ * Reference for {@link RecyclerView}: https://medium.com/@thebaileybrew/utilizing-androids-most-underrated-tool-recyclerview-viewholder-72f008627d89
  */
-public class ArticleAdapter extends ArrayAdapter<Article> {
+public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder> {
 
     /** String containing the split position of Date **/
     private static final String DATE_SEPARATOR = "T";
 
-    public ArticleAdapter(Activity context, ArrayList<Article> articles) {
-        super(context, 0, articles);
-    }
+    private LayoutInflater layoutInflater;
 
-    // Class to hold ArrayList Views.
-    static class ArticleViewHolder {
+    /** ArrayList containing {@link Article} objects **/
+    private ArrayList<Article> articles;
+
+    /**
+     * Class containing ArrayList Views
+     */
+    class ArticleViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private TextView contributor;
         private TextView section;
         private TextView date;
+        private ImageView thumbnail;
+
+        private ArticleViewHolder(View itemView) {
+            super(itemView);
+            // Finds title, contributor, section and date TextViews and thumbnail ImageView.
+            title = (TextView) itemView.findViewById(R.id.title);
+            contributor = (TextView) itemView.findViewById(R.id.contributor);
+            section = (TextView) itemView.findViewById(R.id.section);
+            date = (TextView) itemView.findViewById(R.id.date);
+            thumbnail = (ImageView) itemView.findViewById(R.id.thumbnail_image);
+        }
+    }
+
+    public ArticleAdapter(Activity context, ArrayList<Article> articles) {
+        this.layoutInflater = LayoutInflater.from(context);
+        this.articles = articles;
+    }
+
+    /**
+     * Inflates the layout with {@link Article} objects.
+     */
+    @Override
+    public ArticleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = layoutInflater.inflate(R.layout.list_item, parent, false);
+        return new ArticleViewHolder(view);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public void onBindViewHolder(ArticleViewHolder holder, int position) {
         // Get the {@link Article} object located at the current position.
-        Article currentArticle = getItem(position);
-
-        ArticleViewHolder holder;
-
-        // Checks if the view is being reused, otherwise inflate.
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
-            holder = new ArticleViewHolder();
-            // Finds title, contributor, section and date TextViews.
-            holder.title = (TextView) convertView.findViewById(R.id.title);
-            holder.contributor = (TextView) convertView.findViewById(R.id.contributor);
-            holder.section = (TextView) convertView.findViewById(R.id.section);
-            holder.date = (TextView) convertView.findViewById(R.id.date);
-            convertView.setTag(holder);
-        } else {
-            holder = (ArticleViewHolder) convertView.getTag();
-        }
+        final Article currentArticle = articles.get(position);
 
         // Sets title to current Article object.
         holder.title.setText(currentArticle.getTitle());
@@ -62,7 +84,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         // If a contributor is not available, sets the TextView visibility to GONE.
         // Else, sets contributor to current Article object.
         String contributorText = currentArticle.getContributor();
-        if(contributorText == null) {
+        if (contributorText == null) {
             holder.contributor.setVisibility(View.GONE);
         } else {
             holder.contributor.setText(contributorText);
@@ -75,7 +97,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         String date = null;
 
         // If date contains a "T", split String here and assign first part to date.
-        if(originalDate.contains(DATE_SEPARATOR)) {
+        if (originalDate.contains(DATE_SEPARATOR)) {
             String[] parts = originalDate.split(DATE_SEPARATOR);
             date = parts[0];
         }
@@ -95,6 +117,57 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         // Sets text of the date TextView.
         holder.date.setText(date);
 
-        return convertView;
+        Bitmap articleImage = currentArticle.getThumbnail();
+        holder.thumbnail.setImageBitmap(articleImage);
+
+        // Set an OnClickListener() on the RecyclerView, which sends an implicit intent
+        // to a web browser and opens the selected article.
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Convert the URL String into a URI object.
+                Uri articleUri = Uri.parse(currentArticle.getUrl());
+
+                // Create an intent to view the article URI.
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleUri);
+
+                // Gets PackageManager to query activities that can handle the intent.
+                // Reference: https://developer.android.com/training/basics/intents/sending
+                PackageManager packageManager = v.getContext().getPackageManager();
+                List<ResolveInfo> activities = packageManager.queryIntentActivities(websiteIntent, PackageManager.MATCH_DEFAULT_ONLY);
+                boolean isIntentSafe = activities.size() > 0;
+
+                // If there is an activity, start intent.
+                if (isIntentSafe) {
+                    // Send the intent to a web browser.
+                    v.getContext().startActivity(websiteIntent);
+                }
+            }
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return articles.size();
+    }
+
+    /**
+     * Method used in {@link MainActivity} to clear the adapter of {@link Article} objects.
+     *
+     * Reference: https://github.com/alejandra-gonzalez/LatestInTechNews/blob/master/app/src/main/java/com/example/android/latestintechnews/ArticleAdapter.java
+     */
+    public void clear() {
+        final int size = articles.size();
+        if (size > 0) {
+            articles.removeAll(articles);
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Method used in {@link MainActivity} to add {@link Article} objects to adapter.
+     */
+    public void addAll(List<Article> articleList) {
+        articles.addAll(articleList);
     }
 }

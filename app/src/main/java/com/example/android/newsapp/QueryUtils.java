@@ -1,5 +1,7 @@
 package com.example.android.newsapp;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -181,9 +183,16 @@ public final class QueryUtils {
                     }
                 }
 
+                // https://stackoverflow.com/questions/10594188/check-if-a-particular-json-object-is-available-or-not
+                String thumbnail = "";
+                if(results.getJSONObject(i).has("fields")) {
+                    JSONObject fields = currentArticle.getJSONObject("fields");
+                    thumbnail = fields.getString("thumbnail");
+                }
+
                 // Create a new {@link Article} object with the title, section, date, contributor, and url
                 // from the JSON response.
-                Article article = new Article(title, contributor, section, date, url);
+                Article article = new Article(title, contributor, section, date, url, getBitmap(thumbnail));
 
                 // Add the new {@link Article} object to the list of articles.
                 articles.add(article);
@@ -193,5 +202,20 @@ public final class QueryUtils {
         }
         // Returns the list of articles.
         return articles;
+    }
+
+    // https://stackoverflow.com/questions/51587354/how-to-replace-low-res-image-reference-at-end-of-url-string-with-the-higher-res#51587860
+    private static Bitmap getBitmap(String originalUrl) {
+        Bitmap bitmap = null;
+        if(!"".equals(originalUrl)) {
+            InputStream inputStream = null;
+            try {
+                inputStream = new URL(originalUrl).openStream();
+                bitmap = BitmapFactory.decodeStream(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return bitmap;
     }
 }

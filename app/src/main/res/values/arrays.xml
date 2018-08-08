@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="order_by_titles">
+        <item>@string/order_by_newest_title</item>
+        <item>@string/order_by_oldest_title</item>
+        <item>@string/order_by_relevance_title</item>
+    </string-array>
+
+    <string-array name="order_by_values">
+        <item>@string/order_by_newest_value</item>
+        <item>@string/order_by_oldest_value</item>
+        <item>@string/order_by_relevance_value</item>
+    </string-array>
+
+    <string-array name="section_titles">
+        <item>@string/section_tech_title</item>
+        <item>@string/section_science_title</item>
+        <item>@string/section_us_news_title</item>
+    </string-array>
+
+    <string-array name="section_values">
+        <item>@string/section_tech_value</item>
+        <item>@string/section_science_value</item>
+        <item>@string/section_us_news_value</item>
+    </string-array>
+</resources>
