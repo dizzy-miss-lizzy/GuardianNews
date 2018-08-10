@@ -35,6 +35,8 @@ import java.util.List;
  * Title, contributor, section, date and thumbnail image are displayed for each item.
  * Clicking an item will open an implicit intent to view the article in a web browser.
  *
+ * NOTE: Place your API key in the onCreateLoader method.
+ *
  * Icons courtesy of Material Icons: https://material.io/tools/icons/?style=baseline
  * Reference for Navigation Drawer: https://developer.android.com/training/implementing-navigation/nav-drawer
  */
@@ -283,7 +285,7 @@ public class MainActivity extends AppCompatActivity implements LoaderCallbacks<L
         uriBuilder.appendQueryParameter("show-fields", "thumbnail");
         uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("q", keyword);
-        uriBuilder.appendQueryParameter("api-key", "c47c39bd-f229-4b85-8a38-6c006753efc0");
+        uriBuilder.appendQueryParameter("api-key", ""); /** PLACE API KEY HERE **/
 
         // Returns completed URI
         return new ArticleLoader(this, uriBuilder.toString());
