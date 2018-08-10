@@ -9,7 +9,8 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 /**
- * Created by bookworm on 8/2/2018.
+ * This activity contains a Fragment and displays the Preference settings, such as "Order By",
+ * "Articles Displayed", and "Keyword".
  */
 public class SettingsActivity extends AppCompatActivity {
 
@@ -26,9 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.settings_main);
 
-            Preference section = findPreference(getString(R.string.section_key));
-            bindPreferenceSummaryToValue(section);
-
+            // Finds reference to Order By, Articles Displayed, and Keyword
             Preference orderBy = findPreference(getString(R.string.order_by_key));
             bindPreferenceSummaryToValue(orderBy);
 
@@ -39,6 +38,9 @@ public class SettingsActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(keyword);
         }
 
+        /**
+         * Listens for changes to the Preferences and updates the displayed Preferences.
+         */
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             String value = newValue.toString();
@@ -55,6 +57,9 @@ public class SettingsActivity extends AppCompatActivity {
             return true;
         }
 
+        /**
+         * Handles the PreferenceChangeListener and gets the key of Preference.
+         */
         private void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());

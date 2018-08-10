@@ -12,7 +12,7 @@
         android:layout_margin="@dimen/margin_top_bottom"
         card_view:cardCornerRadius="@dimen/card_view_corner"
         card_view:cardBackgroundColor="@color/cardViewBackground"
-        card_view:cardElevation="@dimen/card_view_elevation">
+        card_view:cardElevation="@dimen/card_view_toolbar_elevation">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -21,7 +21,8 @@
             <ImageView
                 android:id="@+id/thumbnail_image"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:adjustViewBounds="true" />
 
             <TextView

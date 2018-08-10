@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="192dp"
+    android:layout_height="@dimen/nav_header_height"
     android:background="?attr/colorPrimaryDark"
-    android:padding="16dp"
+    android:padding="@dimen/nav_header_vertical_spacing"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:gravity="bottom"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My header title"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
 </LinearLayout>

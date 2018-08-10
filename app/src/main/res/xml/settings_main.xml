@@ -3,13 +3,6 @@
     android:title="@string/settings_title">
 
     <ListPreference
-        android:defaultValue="@string/section_default"
-        android:entries="@array/section_titles"
-        android:entryValues="@array/section_values"
-        android:key="@string/section_key"
-        android:title="@string/section_title" />
-
-    <ListPreference
         android:defaultValue="@string/order_by_default"
         android:entries="@array/order_by_titles"
         android:entryValues="@array/order_by_values"

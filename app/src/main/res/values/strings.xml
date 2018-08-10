@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">Tech News</string>
+    <string name="app_name">Guardian News</string>
+
+    <!-- Error messages -->
     <string name="no_articles_found">Currently, there is nothing to display.\nCheck again later for new stories.</string>
     <string name="no_internet">Oops!\nYou are not connected to the Internet.</string>
+
+    <!-- Error message icon description -->
     <string name="empty_view_image_description">No Internet or Error icon</string>
 
     <!-- Settings Activity ActionBar title -->
@@ -31,17 +35,17 @@
     <string name="keyword_key" translatable="false">keyword</string>
     <string name="keyword_default" translatable="false"></string>
 
-    <!-- Section preference: -->
-    <string name="section_title">Section</string>
-    <string name="section_key" translatable="false">section</string>
-    <string name="section_default" translatable="false">@string/section_tech_value</string>
-
-    <string name="section_tech_title">Technology</string>
-    <string name="section_tech_value" translatable="false">technology</string>
-
-    <string name="section_science_title">Science</string>
-    <string name="section_science_value" translatable="false">science</string>
-
+    <!-- Navigation Drawer items -->
     <string name="section_us_news_title">US News</string>
-    <string name="section_us_news_value" translatable="false">us-news</string>
+    <string name="section_world_news_title">World News</string>
+    <string name="section_environment_title">Environment</string>
+    <string name="section_sports_title">Sports</string>
+    <string name="section_business_title">Business</string>
+    <string name="section_tech_title">Technology</string>
+    <string name="section_science_title">Science</string>
+    <string name="section_entertainment_header">Entertainment</string>
+    <string name="section_film_title">Film</string>
+    <string name="section_books_title">Books</string>
+    <string name="section_music_title">Music</string>
+    <string name="section_settings_header">Settings</string>
 </resources>

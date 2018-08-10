@@ -6,20 +6,61 @@
         android:checkableBehavior="single"
         app:showAsAction="always">
         <item
+            android:id="@+id/us_news"
+            android:icon="@drawable/baseline_account_balance_black_24"
+            android:title="@string/section_us_news_title" />
+        <item
+            android:id="@+id/world_news"
+            android:icon="@drawable/baseline_public_black_24"
+            android:title="@string/section_world_news_title" />
+        <item
+            android:id="@+id/environment"
+            android:icon="@drawable/baseline_nature_people_black_24"
+            android:title="@string/section_environment_title" />
+        <item
+            android:id="@+id/sports"
+            android:icon="@drawable/baseline_golf_course_black_24"
+            android:title="@string/section_sports_title" />
+        <item
+            android:id="@+id/business"
+            android:icon="@drawable/baseline_business_black_24"
+            android:title="@string/section_business_title" />
+        <item
             android:id="@+id/tech"
+            android:icon="@drawable/baseline_phone_iphone_black_24"
             android:title="@string/section_tech_title" />
-
         <item
             android:id="@+id/science"
+            android:icon="@drawable/baseline_wb_incandescent_black_24"
             android:title="@string/section_science_title" />
-
-        <item
-            android:id="@+id/us_news"
-            android:title="@string/section_us_news_title" />
-
-        <item
-            android:id="@+id/settings"
-            android:title="@string/settings_title" />
     </group>
 
+    <item android:title="@string/section_entertainment_header">
+        <menu>
+            <item
+                android:id="@+id/film"
+                android:checkable="true"
+                android:icon="@drawable/baseline_theaters_black_24"
+                android:title="@string/section_film_title" />
+            <item
+                android:id="@+id/books"
+                android:checkable="true"
+                android:icon="@drawable/baseline_local_library_black_24"
+                android:title="@string/section_books_title" />
+            <item
+                android:id="@+id/music"
+                android:checkable="true"
+                android:icon="@drawable/baseline_music_note_black_24"
+                android:title="@string/section_music_title" />
+        </menu>
+    </item>
+
+    <item android:title="@string/section_settings_header">
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/baseline_settings_black_24"
+                android:title="@string/settings_title" />
+        </menu>
+    </item>
 </menu>

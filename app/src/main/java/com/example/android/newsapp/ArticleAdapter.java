@@ -33,13 +33,14 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     /** String containing the split position of Date **/
     private static final String DATE_SEPARATOR = "T";
 
+    /** Layout inflated when data is loaded **/
     private LayoutInflater layoutInflater;
 
     /** ArrayList containing {@link Article} objects **/
     private ArrayList<Article> articles;
 
     /**
-     * Class containing ArrayList Views
+     * Class containing ArrayList Views.
      */
     class ArticleViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
@@ -59,6 +60,9 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         }
     }
 
+    /**
+     * {@link ArticleAdapter} constructor.
+     */
     public ArticleAdapter(Activity context, ArrayList<Article> articles) {
         this.layoutInflater = LayoutInflater.from(context);
         this.articles = articles;
@@ -73,6 +77,9 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         return new ArticleViewHolder(view);
     }
 
+    /**
+     * Handles finding the {@link Article} position and setting text and bitmap.
+     */
     @Override
     public void onBindViewHolder(ArticleViewHolder holder, int position) {
         // Get the {@link Article} object located at the current position.
@@ -95,7 +102,6 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
         String originalDate = currentArticle.getDate();
         String date = null;
-
         // If date contains a "T", split String here and assign first part to date.
         if (originalDate.contains(DATE_SEPARATOR)) {
             String[] parts = originalDate.split(DATE_SEPARATOR);
@@ -117,6 +123,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
         // Sets text of the date TextView.
         holder.date.setText(date);
 
+        // Gets Thumbnail and sets bitmap to current Article object.
         Bitmap articleImage = currentArticle.getThumbnail();
         holder.thumbnail.setImageBitmap(articleImage);
 
@@ -137,9 +144,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
                 List<ResolveInfo> activities = packageManager.queryIntentActivities(websiteIntent, PackageManager.MATCH_DEFAULT_ONLY);
                 boolean isIntentSafe = activities.size() > 0;
 
-                // If there is an activity, start intent.
+                // If there is an activity, start intent and send to web browser.
                 if (isIntentSafe) {
-                    // Send the intent to a web browser.
                     v.getContext().startActivity(websiteIntent);
                 }
             }
@@ -153,11 +159,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     /**
      * Method used in {@link MainActivity} to clear the adapter of {@link Article} objects.
-     *
      * Reference: https://github.com/alejandra-gonzalez/LatestInTechNews/blob/master/app/src/main/java/com/example/android/latestintechnews/ArticleAdapter.java
      */
     public void clear() {
-        final int size = articles.size();
+        int size = articles.size();
         if (size > 0) {
             articles.removeAll(articles);
         }
@@ -166,6 +171,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
 
     /**
      * Method used in {@link MainActivity} to add {@link Article} objects to adapter.
+     * End reference.
      */
     public void addAll(List<Article> articleList) {
         articles.addAll(articleList);

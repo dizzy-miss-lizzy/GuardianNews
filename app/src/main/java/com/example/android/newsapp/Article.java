@@ -3,8 +3,7 @@ package com.example.android.newsapp;
 import android.graphics.Bitmap;
 
 /**
- * {@link Article} represents the information about an article, such as title, contributor,
- * section, date, and url, and provides the get() methods for the data.
+ * {@link Article} represents the information about an article and provides the get() methods for the data.
  */
 public class Article {
 

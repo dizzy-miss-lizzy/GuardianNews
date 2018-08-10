@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper methods for requesting, receiving and parsing article data from The Guardian API.
+ * Helper methods for requesting, receiving and parsing article data from the Guardian API.
  */
 public final class QueryUtils {
 
@@ -156,7 +156,7 @@ public final class QueryUtils {
 
             // For each article in the results JSONArray, create an {@link Article} object.
             for (int i = 0; i < results.length(); i++) {
-                // Get an article at position i from the list of articles
+                // Get an article at position i from the list of articles.
                 JSONObject currentArticle = results.getJSONObject(i);
 
                 // Extract the values for the keys "webTitle", "sectionName", "webPublicationDate", and "webUrl".
@@ -183,15 +183,16 @@ public final class QueryUtils {
                     }
                 }
 
-                // https://stackoverflow.com/questions/10594188/check-if-a-particular-json-object-is-available-or-not
+                // Check if a JSONObject with key "fields" exists. If so, extract the thumbnail String.
+                // Reference: https://stackoverflow.com/questions/10594188/check-if-a-particular-json-object-is-available-or-not
                 String thumbnail = "";
                 if(results.getJSONObject(i).has("fields")) {
                     JSONObject fields = currentArticle.getJSONObject("fields");
                     thumbnail = fields.getString("thumbnail");
                 }
 
-                // Create a new {@link Article} object with the title, section, date, contributor, and url
-                // from the JSON response.
+                // Create a new {@link Article} object with the title, section, date, contributor, url,
+                // and thumbnail from the JSON response.
                 Article article = new Article(title, contributor, section, date, url, getBitmap(thumbnail));
 
                 // Add the new {@link Article} object to the list of articles.
@@ -204,7 +205,10 @@ public final class QueryUtils {
         return articles;
     }
 
-    // https://stackoverflow.com/questions/51587354/how-to-replace-low-res-image-reference-at-end-of-url-string-with-the-higher-res#51587860
+    /**
+     * Returns the thumbnail String after converting it to Bitmap.
+     * Reference: https://stackoverflow.com/questions/51587354/how-to-replace-low-res-image-reference-at-end-of-url-string-with-the-higher-res#51587860
+     */
     private static Bitmap getBitmap(String originalUrl) {
         Bitmap bitmap = null;
         if(!"".equals(originalUrl)) {
